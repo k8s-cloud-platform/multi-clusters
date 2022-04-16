@@ -1,0 +1,59 @@
+apiVersion: apps.mcp.io/v1alpha1
+kind: Manifest
+metadata:
+  namespace: default
+  name: v1-service-game-api
+  labels:
+    manifest.apps.mcp.io/apiGroup: ""
+    manifest.apps.mcp.io/apiVersion: v1
+    manifest.apps.mcp.io/kind: Service
+    manifest.apps.mcp.io/namespace: default
+    manifest.apps.mcp.io/name: game-api
+template:
+  apiVersion: v1
+  kind: Service
+  metadata:
+    namespace: default
+    name: game-api
+  spec:
+    selector:
+      app: nginx
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+        targetPort: 80
+    type: ClusterIP
+
+---
+
+apiVersion: apps.mcp.io/v1alpha1
+kind: Manifest
+metadata:
+  namespace: default
+  name: apps-v1-deployment-game-api
+  labels:
+    manifest.apps.mcp.io/apiGroup: apps
+    manifest.apps.mcp.io/apiVersion: v1
+    manifest.apps.mcp.io/kind: Deployment
+    manifest.apps.mcp.io/namespace: default
+    manifest.apps.mcp.io/name: game-api
+template:
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    namespace: default
+    name: game-api
+  spec:
+    selector:
+      matchLabels:
+        app: nginx
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          app: nginx
+      spec:
+        containers:
+          - name: nginx
+            image: nginx:alpine

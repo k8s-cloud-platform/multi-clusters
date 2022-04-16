@@ -1,0 +1,50 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: mcp-manager
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+- apiGroups:
+  - apps.mcp.io
+  resources:
+  - deployables
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apps.mcp.io
+  resources:
+  - deployables/status
+  verbs:
+  - create
+  - get
+  - patch
+  - update
+- apiGroups:
+  - apps.mcp.io
+  resources:
+  - manifests
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - work.open-cluster-management.io
+  resources:
+  - manifestworks
+  verbs:
+  - create
+  - get
+  - update

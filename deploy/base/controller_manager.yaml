@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mcp-system
+  name: controller-manager
+spec:
+  selector:
+    matchLabels:
+      app: mcp-controller-manager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mcp-controller-manager
+    spec:
+      containers:
+        - name: manager
+          image: multicluster/mcp-controller-manager:v0.1.0-rc.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - /manager
+      serviceAccountName: mcp-manager

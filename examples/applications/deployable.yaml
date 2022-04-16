@@ -1,0 +1,18 @@
+apiVersion: apps.mcp.io/v1alpha1
+kind: Deployable
+metadata:
+  namespace: default
+  name: game-api
+spec:
+  placement:
+    clusterNames:
+      - cluster1
+  resources:
+    - apiVersion: apps/v1
+      kind: Deployment
+      namespace: default
+      name: game-api
+    - apiVersion: v1
+      kind: Service
+      namespace: default
+      name: game-api
