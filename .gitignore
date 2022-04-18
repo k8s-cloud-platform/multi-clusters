@@ -19,4 +19,7 @@
 vendor
 
 bin
-code/hack/tools/bin
+hack/tools/bin
+
+apiserver.local.config
+*.yaml-e
